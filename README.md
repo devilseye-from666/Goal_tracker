@@ -51,7 +51,7 @@ http://127.0.0.1:5000
 
 
 
-###🔹 Frontend (React + Vite)
+### 🔹 Frontend (React + Vite)
 Navigate to the frontend folder:
 cd frontend
 
