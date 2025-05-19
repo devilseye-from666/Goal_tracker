@@ -1,7 +1,3 @@
-<pre> ## 📁 Project Structure ``` project-root/ │ ├── backend/ │ ├── app.py │ ├── extensions.py │ ├── models.py │ ├── routes.py │ ├── goal_tracking.db │ ├── requirements.txt │ └── instance/ │ ├── Frontend/ │ ├── src/ │ ├── public/ │ ├── index.html │ ├── vite.config.js │ ├── package.json │ └── README.md │ └── README.md (this file) ``` </pre>
-
-
----
 
 ## ⚙️ Setup Instructions
 
