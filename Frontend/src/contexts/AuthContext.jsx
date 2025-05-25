@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post(`${API_BASE_URL}/auth/logout`,{ withCredentials: true });
+      await axios.post(`${API_BASE_URL}/auth/logout`);
       setCurrentUser(null);
       localStorage.removeItem('user');
     } catch (error) {
