@@ -1,5 +1,6 @@
 Flask
 Flask-SQLAlchemy
+flask-cors
 Flask-Login
 Werkzeug
 Flask==2.3.2
