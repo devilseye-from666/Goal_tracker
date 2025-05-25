@@ -66,7 +66,7 @@ const GoalProgress = () => {
         ? { increment: Number(progressValue) }
         : { current_value: Number(progressValue) };
         
-      const response = await axios.patch(`${API_BASE_URL}/goals/${id}/progress`, payload);
+      const response = await axios.patch(`${API_BASE_URL}/goals/${id}/progress`, payload,{ withCredentials: true });
       setGoal(response.data);
       setSuccessMessage('Progress updated successfully!');
       setProgressValue(incrementMode ? '' : response.data.current_value);
