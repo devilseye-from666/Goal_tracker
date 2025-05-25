@@ -68,9 +68,9 @@ const GoalForm = () => {
     
     try {
       if (isEditMode) {
-        await axios.put(`${API_BASE_URL}//goals/${id}`, payload,{ withCredentials: true });
+        await axios.put(`${API_BASE_URL}/goals/${id}`, payload,{ withCredentials: true });
       } else {
-        await axios.post(`${API_BASE_URL}//goals`, payload,{ withCredentials: true });
+        await axios.post(`${API_BASE_URL}/goals`, payload,{ withCredentials: true });
       }
       navigate('/goals');
     } catch (err) {
