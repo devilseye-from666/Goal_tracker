@@ -26,7 +26,7 @@ const TipList = ({ goalId }) => {
   useEffect(() => {
     const fetchTips = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/goals/${goalId}/tips`);
+        const response = await axios.get(`${API_BASE_URL}/goals/${goalId}/tips`,{ withCredentials: true });
         setTips(response.data);
       } catch (err) {
         setError('Failed to load tips');
@@ -69,10 +69,10 @@ const TipList = ({ goalId }) => {
     
     try {
       if (editingTip) {
-        const response = await axios.put(`/api/tips/${editingTip.id}`, formData);
+        const response = await axios.put(`${API_BASE_URL}/tips/${editingTip.id}`, formData,{ withCredentials: true });
         setTips(tips.map(tip => tip.id === editingTip.id ? response.data : tip));
       } else {
-        const response = await axios.post(`/api/goals/${goalId}/tips`, formData);
+        const response = await axios.post(`${API_BASE_URL}/goals/${goalId}/tips`, formData,{ withCredentials: true });
         setTips([...tips, response.data]);
       }
       handleCloseDialog();
@@ -83,7 +83,7 @@ const TipList = ({ goalId }) => {
 
   const handleDeleteTip = async (tipId) => {
     try {
-      await axios.delete(`/api/tips/${tipId}`);
+      await axios.delete(`${API_BASE_URL}/tips/${tipId}`,{ withCredentials: true });
       setTips(tips.filter(tip => tip.id !== tipId));
     } catch (err) {
       setError('Failed to delete tip');

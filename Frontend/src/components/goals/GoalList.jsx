@@ -18,7 +18,7 @@ const GoalList = () => {
   useEffect(() => {
     const fetchGoals = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/goals`);
+        const response = await axios.get(`${API_BASE_URL}/goals`,{ withCredentials: true });
         setGoals(response.data);
         setLoading(false);
       } catch (err) {

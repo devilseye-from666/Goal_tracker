@@ -29,7 +29,7 @@ const GoalForm = () => {
     if (isEditMode) {
       const fetchGoal = async () => {
         try {
-          const response = await axios.get(`${API_BASE_URL}/goals/${id}`);
+          const response = await axios.get(`${API_BASE_URL}/goals/${id}`,{ withCredentials: true });
           const goal = response.data;
           setFormData({
             title: goal.title,
@@ -68,9 +68,9 @@ const GoalForm = () => {
     
     try {
       if (isEditMode) {
-        await axios.put(`/api/goals/${id}`, payload);
+        await axios.put(`${API_BASE_URL}//goals/${id}`, payload,{ withCredentials: true });
       } else {
-        await axios.post('/api/goals', payload);
+        await axios.post(`${API_BASE_URL}//goals`, payload,{ withCredentials: true });
       }
       navigate('/goals');
     } catch (err) {

@@ -20,7 +20,7 @@ const PlanList = ({ goalId }) => {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/goals/${goalId}/plans`);
+        const response = await axios.get(`${API_BASE_URL}/goals/${goalId}/plans`,{ withCredentials: true });
         setPlans(response.data);
       } catch (err) {
         setError('Failed to load plans');
@@ -38,9 +38,9 @@ const PlanList = ({ goalId }) => {
     
     setSubmitting(true);
     try {
-      const response = await axios.post(`/api/goals/${goalId}/plans`, {
+      const response = await axios.post(`${API_BASE_URL}/goals/${goalId}/plans`, {
         content: newPlan
-      });
+      },{ withCredentials: true });
       setPlans([...plans, response.data]);
       setNewPlan('');
     } catch (err) {
@@ -52,9 +52,9 @@ const PlanList = ({ goalId }) => {
 
   const handleToggleComplete = async (planId, completed) => {
     try {
-      const response = await axios.put(`/api/plans/${planId}`, {
+      const response = await axios.put(`${API_BASE_URL}/plans/${planId}`, {
         completed: !completed
-      });
+      },{ withCredentials: true });
       
       setPlans(plans.map(plan => 
         plan.id === planId ? response.data : plan
@@ -66,7 +66,7 @@ const PlanList = ({ goalId }) => {
 
   const handleDeletePlan = async (planId) => {
     try {
-      await axios.delete(`/api/plans/${planId}`);
+      await axios.delete(`${API_BASE_URL}/plans/${planId}`,{ withCredentials: true });
       setPlans(plans.filter(plan => plan.id !== planId));
     } catch (err) {
       setError('Failed to delete plan');

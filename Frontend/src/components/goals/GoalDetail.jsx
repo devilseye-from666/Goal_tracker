@@ -25,7 +25,7 @@ const GoalDetail = () => {
   useEffect(() => {
     const fetchGoal = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/goals/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/goals/${id}`,{ withCredentials: true });
         setGoal(response.data);
       } catch (err) {
         setError('Failed to load goal details');
@@ -53,7 +53,7 @@ const GoalDetail = () => {
 
   const handleDeleteConfirm = async () => {
     try {
-      await axios.delete(`/api/goals/${id}`);
+      await axios.delete(`${API_BASE_URL}/goals/${id}`,{ withCredentials: true });
       setDeleteDialogOpen(false);
       navigate('/goals');
     } catch (err) {

@@ -23,7 +23,7 @@ const GoalProgress = () => {
   useEffect(() => {
     const fetchGoal = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/goals/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/goals/${id}`,{ withCredentials: true });
         setGoal(response.data);
         setProgressValue(incrementMode ? '' : response.data.current_value || '0');
       } catch (err) {
@@ -66,7 +66,7 @@ const GoalProgress = () => {
         ? { increment: Number(progressValue) }
         : { current_value: Number(progressValue) };
         
-      const response = await axios.patch(`/api/goals/${id}/progress`, payload);
+      const response = await axios.patch(`${API_BASE_URL}/goals/${id}/progress`, payload);
       setGoal(response.data);
       setSuccessMessage('Progress updated successfully!');
       setProgressValue(incrementMode ? '' : response.data.current_value);
