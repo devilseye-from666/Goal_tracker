@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+import { API_BASE_URL } from '../../api/config'; 
 
 const PlanList = ({ goalId }) => {
   const [plans, setPlans] = useState([]);
@@ -19,7 +20,7 @@ const PlanList = ({ goalId }) => {
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const response = await axios.get(`/api/goals/${goalId}/plans`);
+        const response = await axios.get(`${API_BASE_URL}/goals/${goalId}/plans`);
         setPlans(response.data);
       } catch (err) {
         setError('Failed to load plans');

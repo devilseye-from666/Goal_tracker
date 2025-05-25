@@ -8,6 +8,7 @@ import {
   CardContent, CardActions, LinearProgress, Box 
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import { API_BASE_URL } from '../../api/config'; 
 
 const GoalList = () => {
   const [goals, setGoals] = useState([]);
@@ -17,7 +18,7 @@ const GoalList = () => {
   useEffect(() => {
     const fetchGoals = async () => {
       try {
-        const response = await axios.get('/api/goals');
+        const response = await axios.get(`${API_BASE_URL}/goals`);
         setGoals(response.data);
         setLoading(false);
       } catch (err) {

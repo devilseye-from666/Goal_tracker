@@ -11,6 +11,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import PlanList from '../plans/PlanList';
 import TipList from '../tips/TipList';
+import { API_BASE_URL } from '../../api/config'; 
 
 const GoalDetail = () => {
   const { id } = useParams();
@@ -24,7 +25,7 @@ const GoalDetail = () => {
   useEffect(() => {
     const fetchGoal = async () => {
       try {
-        const response = await axios.get(`/api/goals/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/goals/${id}`);
         setGoal(response.data);
       } catch (err) {
         setError('Failed to load goal details');

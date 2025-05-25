@@ -8,6 +8,7 @@ import {
   TextField, FormControl, InputLabel, Input, InputAdornment,
   FormControlLabel, Switch, Alert
 } from '@mui/material';
+import { API_BASE_URL } from '../../api/config'; 
 
 const GoalProgress = () => {
   const { id } = useParams();
@@ -22,7 +23,7 @@ const GoalProgress = () => {
   useEffect(() => {
     const fetchGoal = async () => {
       try {
-        const response = await axios.get(`/api/goals/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/goals/${id}`);
         setGoal(response.data);
         setProgressValue(incrementMode ? '' : response.data.current_value || '0');
       } catch (err) {

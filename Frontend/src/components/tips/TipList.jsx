@@ -10,6 +10,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
+import { API_BASE_URL } from '../../api/config'; 
 
 const TipList = ({ goalId }) => {
   const [tips, setTips] = useState([]);
@@ -25,7 +26,7 @@ const TipList = ({ goalId }) => {
   useEffect(() => {
     const fetchTips = async () => {
       try {
-        const response = await axios.get(`/api/goals/${goalId}/tips`);
+        const response = await axios.get(`${API_BASE_URL}/goals/${goalId}/tips`);
         setTips(response.data);
       } catch (err) {
         setError('Failed to load tips');

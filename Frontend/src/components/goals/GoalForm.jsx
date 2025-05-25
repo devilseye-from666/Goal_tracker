@@ -9,6 +9,7 @@ import {
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { API_BASE_URL } from '../../api/config'; 
 
 const GoalForm = () => {
   const { id } = useParams();
@@ -28,7 +29,7 @@ const GoalForm = () => {
     if (isEditMode) {
       const fetchGoal = async () => {
         try {
-          const response = await axios.get(`/api/goals/${id}`);
+          const response = await axios.get(`${API_BASE_URL}/goals/${id}`);
           const goal = response.data;
           setFormData({
             title: goal.title,
