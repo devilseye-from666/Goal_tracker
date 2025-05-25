@@ -1,6 +1,7 @@
 services:
   - type: web
-    name: flask-app
-    runtime: python
+    name: flask-backend
+    env: python
+    rootDir: backend
     buildCommand: ""
     startCommand: gunicorn app:app
