@@ -12,4 +12,8 @@ export default defineConfig({
       '/api': 'https://goal-tracker-ohcq.onrender.com', // proxies /api requests to your backend
     },
   },
+  build: {
+    chunkSizeWarningLimit: 1000, // Increase to 1000 KB or more
+  },
+
 })
