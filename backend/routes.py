@@ -11,9 +11,14 @@ from models import User , Goal , Tip , Plan
 @app.route('/api/auth/signup', methods=['POST'])
 def signup():
     data = request.get_json()
+
+    # Basic input validation
+    if not data.get('email') or not data.get('password') or not data.get('username'):
+        return jsonify({'error': 'Missing email, username, or password'}), 400
+
     if User.query.filter_by(email=data['email']).first():
         return jsonify({'error': 'Email already exists'}), 400
-
+    
     user = User(
         email=data['email'],
         username=data.get('username')

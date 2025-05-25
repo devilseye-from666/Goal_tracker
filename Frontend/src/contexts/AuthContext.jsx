@@ -1,7 +1,7 @@
 // src/contexts/AuthContext.jsx
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-import { API_BASE_URL } from '../api/config'; 
+import { API_BASE_URL } from '../api/config';
 
 const AuthContext = createContext(null);
 
@@ -10,7 +10,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is already logged in (could use localStorage)
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
       setCurrentUser(user);
@@ -20,32 +19,40 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/auth/login`, { email, password },{ withCredentials: true });
+      const response = await axios.post(
+        `${API_BASE_URL}/auth/login`,
+        { email, password },
+        { withCredentials: true }
+      );
       setCurrentUser(response.data);
       localStorage.setItem('user', JSON.stringify(response.data));
       return response.data;
     } catch (error) {
-      throw error.response.data;
+      throw error.response?.data || { error: 'Login failed' };
     }
   };
 
   const signup = async (email, username, password) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/auth/signup`, { email, username, password },{ withCredentials: true });
-      
-      // ADD THIS:
+      const response = await axios.post(
+        `${API_BASE_URL}/auth/signup`,
+        { email, username, password },
+        { withCredentials: true }
+      );
       setCurrentUser(response.data);
       localStorage.setItem('user', JSON.stringify(response.data));
-      
       return response.data;
     } catch (error) {
-      throw error.response.data;
+      // Ensure safe fallback if error response is missing
+      throw error.response?.data || { error: 'Signup failed' };
     }
   };
 
   const logout = async () => {
     try {
-      await axios.post(`${API_BASE_URL}/auth/logout`,null, { withCredentials: true });
+      await axios.post(`${API_BASE_URL}/auth/logout`, null, {
+        withCredentials: true,
+      });
       setCurrentUser(null);
       localStorage.removeItem('user');
     } catch (error) {
@@ -58,7 +65,7 @@ export const AuthProvider = ({ children }) => {
     login,
     signup,
     logout,
-    loading
+    loading,
   };
 
   return (
@@ -68,6 +75,4 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);
