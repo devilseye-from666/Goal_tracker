@@ -31,7 +31,12 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (email, username, password) => {
     try {
-      const response = await axios.post('/api/auth/signup', { email, username, password });
+      const response = await axios.post(`${API_BASE_URL}/auth/signup`, { email, username, password });
+      
+      // ADD THIS:
+      setCurrentUser(response.data);
+      localStorage.setItem('user', JSON.stringify(response.data));
+      
       return response.data;
     } catch (error) {
       throw error.response.data;
@@ -40,7 +45,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post('/api/auth/logout');
+      await axios.post(`${API_BASE_URL}/auth/logout`);
       setCurrentUser(null);
       localStorage.removeItem('user');
     } catch (error) {
