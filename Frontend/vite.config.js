@@ -9,7 +9,7 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': 'http://0.0.0.0:10000', // proxies /api requests to your backend
+      '/api': 'https://goal-tracker-ohcq.onrender.com', // proxies /api requests to your backend
     },
   },
 })
